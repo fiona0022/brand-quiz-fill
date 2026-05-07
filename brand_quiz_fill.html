@@ -549,7 +549,7 @@ function render() {
   const pct = S.totalCount > 0 ? Math.round((S.doneCount / S.totalCount) * 100) : 0;
   const qLabel = S.mode === 'group' ? '这个品牌属于哪个集团？' : '这个品牌属于哪个品类？';
   const [cn, enBrand, groupDisplay, groupInternal, typ] = S.current;
-  const brandEnHint = enBrand ? `（${enBrand}）` : '';
+  const displayName = enBrand || cn;
 
   const typePillsHtml = Object.entries(TYPE_MAP).map(([k, v]) =>
     `<span class="type-pill" style="border-color:${TYPE_COLORS[k]};color:${TYPE_COLORS[k]}">${k}·${v}</span>`
@@ -609,8 +609,7 @@ function render() {
 
     <div class="card" id="qcard">
       <div class="question-label">${S.doneCount} / ${S.totalCount}</div>
-      <div class="brand-name">${cn}</div>
-      <div class="brand-en">${brandEnHint}</div>
+      <div class="brand-name">${displayName}</div>
       <div class="answer-hint">${qLabel}</div>
       <div class="answer-input-wrap">
         <input type="text" id="answerInput" class="answer-input"
@@ -699,7 +698,7 @@ function renderWrongReview() {
   const done = S.wrongDoneCount;
   const pct = totalWrongs > 0 ? Math.round((done / totalWrongs) * 100) : 0;
   const [cn, enBrand, groupDisplay, groupInternal, typ] = S.current;
-  const brandEnHint = enBrand ? `（${enBrand}）` : '';
+  const displayName = enBrand || cn;
   const qLabel = S.mode === 'group' ? '这个品牌属于哪个集团？' : '这个品牌属于哪个品类？';
 
   const typePillsHtml = Object.entries(TYPE_MAP).map(([k, v]) =>
@@ -728,8 +727,7 @@ function renderWrongReview() {
 
     <div class="card" id="qcard">
       <div class="question-label">错题复习 ${done} / ${totalWrongs}</div>
-      <div class="brand-name">${cn}</div>
-      <div class="brand-en">${brandEnHint}</div>
+      <div class="brand-name">${displayName}</div>
       <div class="answer-hint">${qLabel}</div>
       <div class="answer-input-wrap">
         <input type="text" id="answerInput" class="answer-input"
